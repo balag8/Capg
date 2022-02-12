@@ -1,0 +1,766 @@
+Dynamic and var
+
+Dynamic
+->It is runtime checker.
+->at runtime type of variable is decided.
+->no need to initialise at the time of declaration.
+ dynamic x;
+            x= "c# sharp";
+->It can read/store any type of value.
+
+dynamic str1;
+str1="welcome";
+
+dynamic x=10;
+dynamic y="hello";
+
+
+
+var:
+->It is compile-time checker.
+->at compile type of variable is decided.
+->need to initialise at the time of declaration.
+  var s1="hello";
+->It can read/store any type of value.
+
+
+
+namespace CG_APP1
+{
+    class Demo
+    {
+        public static void print(dynamic v1,dynamic v2)
+        {
+            Console.WriteLine(v1 + v2);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo.print(10,20);
+
+            Demo.print("NEW", "JERSY");
+
+            Demo.print("C#",6.0);
+
+            Demo.print(34.4,10.99);
+        }
+    }
+}
+
+
+Anonymus types:
+
+Anonymus->"no name"
+
+->variables without datatypes is refferd as "Anonymus type"
+->using "var,new" we can declare anonymus types
+
+
+int eid;
+string ename;
+
+
+namespace CG_APP1
+{
+    class Demo
+    {
+        public static void print(dynamic v1)
+        {
+            Console.WriteLine(v1);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var empdet = new { 
+                
+                empid=1,
+                empname="sam",
+                empdesig="s/w engg",
+                empsal=77000
+            
+                             };
+
+            Console.WriteLine(empdet.empid + "," + empdet.empname + "," + empdet.empdesig);
+            Demo.print(empdet);
+        }
+    }
+}
+
+namespace CG_APP1
+{
+    class Demo
+    {
+        public static void print(dynamic v1)
+        {
+            Console.WriteLine(v1);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var empdet = new { 
+                
+                empid=1,
+                empname="sam",
+                empdesig="s/w engg",
+                empsal=77000,
+
+                empaddr = new {
+                                street="4th cross",
+                                city="Bangalore",
+                                country="india"
+                              }
+            
+                             };
+
+            Console.WriteLine(empdet.empid + "," + empdet.empname + "," + empdet.empdesig);
+            Console.WriteLine(empdet.empaddr.street + "," + empdet.empaddr.city + "," + empdet.empaddr.country);
+            Demo.print(empdet);
+        }
+    }
+}
+
+"this"->pointer
+
+
+Delegates:
+->"function pointers"
+->Delegate will invoke the method only if signature of method matches with delegate signature.
+
+namespace CG_APP1
+{
+    delegate void myDelegate(string s1);
+
+    class Demo
+    {
+        public void method1(string x)
+        {
+            Console.WriteLine("welcome to="+x);
+        }
+
+        public void method2(string x)
+        {
+            Console.WriteLine("Programming with=" + x);
+        }
+
+        public void method3(int a,int b)
+        {
+            Console.WriteLine("result="+(a*b));
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+
+            myDelegate del1 = new myDelegate(obj.method1);
+            del1("VB.NET");
+
+            myDelegate del2 = new myDelegate(obj.method2);
+            del2("C++");
+           
+        }
+    }
+}
+
+Multicast Delegate:
+
+namespace CG_APP1
+{
+    delegate void myDelegate(int a,int b);
+
+    class Demo
+    {
+        public void method1(int a,int b)
+        {
+            Console.WriteLine("Sum="+(a+b));
+        }
+
+        public void method2(int a, int b)
+        {
+            Console.WriteLine("Diff=" + (a - b));
+        }
+
+        public void method3(int a,int b)
+        {
+            Console.WriteLine("Product="+(a*b));
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+
+            myDelegate del1 = new myDelegate(obj.method1);
+            del1(100, 20);
+
+            myDelegate del2 = new myDelegate(obj.method2);
+            del2(10, 25);
+
+            myDelegate del3 = new myDelegate(obj.method3);
+            del3.Invoke(25, 25);
+
+            Console.WriteLine("---------MC-DEL------------");
+            myDelegate del4 = del1 + del2 + del3;
+            del4(5, 5);
+
+            Console.WriteLine("---------MC-DEL------------");
+            myDelegate del5 = del1 + del2 - del3;
+            del5(15, 25);
+
+        }
+    }
+}
+
+
+Anonymus methods:
+
+->method without name is reffered as anonymus method.
+->Anonymus methods are written by using delegate.
+->Anonymus methods are dependent on delegate signature.
+
+public void print()
+{
+//fun
+}
+
+print() //fn call
+
+
+
+delegate void myDelegate();
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            myDelegate del1 = delegate{
+
+                Console.WriteLine("this is anonymus block");
+                      
+                                    };
+
+            del1();
+        }
+    }
+
+Anonymus method with parameter.
+namespace CG_APP1
+{
+    delegate void myDelegate(int n);
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            myDelegate del1 = delegate(int n){
+                                                int sum = 0;
+                                                for(int i=0;i<=n;i++)
+                                                {
+                                                    sum = sum + i;
+                                                }
+
+                                                 Console.WriteLine("Sum of numbers="+sum);
+                                            };
+
+            del1(10);
+        }
+    }
+}
+Anonymus method with parameter and return type.
+namespace CG_APP1
+{
+    delegate int myDelegate(int n);
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            myDelegate del1 = delegate(int n){
+                                                int sum = 0;
+                                                for(int i=0;i<=n;i++)
+                                                {
+                                                    sum = sum + i;
+                                                }
+                                                return sum;
+                                            };
+
+            Console.WriteLine("Sum of numbers=" + del1(10));
+        }
+    }
+}
+
+
+Extension method:
+
+namespace CG_APP1
+{
+    static class Demo
+    {
+        public static int ToNumber(this string x)
+        {
+            return int.Parse(x);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string x = "hello";
+            string y = x.ToString();
+            Console.WriteLine(y);
+
+
+            string i = "1234";
+            int j = i.ToNumber();
+            Console.WriteLine(j);
+        }
+    }
+}
+
+namespace CG_APP1
+{
+    static class Example
+    {
+        public static void print3(this Demo obj)
+        {
+            Console.WriteLine("MVC");
+        }
+
+        public static void print4(this Demo obj)
+        {
+            Console.WriteLine("MVC-CORE");
+        }
+    }
+
+    class Demo
+    {
+        public void print1()
+        {
+            Console.WriteLine("C#.NET");
+        }
+
+        public void print2()
+        {
+            Console.WriteLine("ASP.NET");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+            obj.print1();
+            obj.print2();
+            obj.print3();
+            obj.print4();
+        }
+    }
+}
+
+
+Exception Handling:
+
+Errors 
+
+1.Compiletime:syntax,wrong-logic,datatype mismatch.
+
+2.Runtime:
+Errors  which occurs during runtime is refferred as "Exception"
+Runtime errors are handled using "Exception Handling" blocks
+
+try,catch,throw,finally.
+
+Exception (base)
+
+DivideByZeroException (derived)
+ArgumentException (derived)
+IndexOutOfRangeException  (derived)
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            int x, y, z;
+            x = 100;
+            y = 0;
+            try
+            {
+                z = x / y;
+                Console.WriteLine(z);
+            }
+            catch(DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+
+
+namespace CG_APP1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] a = {10,20,30,40,50 };
+            int[] b = new int[3];
+
+            try
+            {
+                a.CopyTo(b, 0);
+                foreach(int i in b)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+            catch(DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Destination array length is not sufficient");
+            }
+        }
+    }
+}
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] a = {10,20,30,40,50 };
+            try
+            {
+                for(int i=0;i<5;i++)
+                {
+                    Console.WriteLine(a[i]);
+                }
+            }
+            catch(IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("end of program");
+            }
+        }
+    }
+}
+
+explicitly throwing an exception 
+
+namespace CG_APP1
+{
+    class Demo
+    {
+        public void validate(string username)
+        {
+            if (username == null || username.Length == 0)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+                Console.WriteLine("valid user");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+            string uname = "abc@gmail.com";
+            try
+            {
+                obj.validate(uname);
+            }
+            catch(ArgumentNullException ex)
+            {
+                Console.WriteLine("Username cannot be blank");
+            }
+            finally
+            {
+                Console.WriteLine("end of program");
+            }
+        }
+    }
+}
+
+User-Defined Exception/Custom Exception 
+
+
+namespace CG_APP1
+{
+    class InvalidAgeException:Exception
+    {
+        public InvalidAgeException(string errmsg):base(errmsg)
+        {
+
+        }
+    }
+    class Demo
+    {
+        public void validate(int age) //age>=18 and age<=60
+        {
+            if (age>=18 && age<=60)
+            {
+                Console.WriteLine("Eligible");
+            }
+            else
+                throw new InvalidAgeException("Invalid age");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+            int age = 121;
+            try
+            {
+                obj.validate(age);
+            }
+            catch(InvalidAgeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("end of program");
+            }
+        }
+    }
+}
+
+Nested namespace:
+namespaces are nested to eliminate ambiguity between the identical class names
+
+namespace CG_APP1
+{
+    namespace NS1
+    {
+        class Example
+        {
+            public void print()
+            {
+                Console.WriteLine("HTML & CSS");
+            }
+        }
+    }
+    
+    namespace NS2
+    {
+        class Example
+        {
+            public void print()
+            {
+                Console.WriteLine("javascript & ajax");
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            NS1.Example e1 = new NS1.Example();
+            e1.print();
+
+            NS2.Example e2 = new NS2.Example();
+            e2.print();
+        }
+    }
+}
+
+
+File Handling
+
+File
+
+create,open,append
+
+using System.IO;
+
+I->Input ->create,write
+O->output->open,read,append
+
+File,Fileinfo,binaryreader,binarywriter,streamreader,streamwriter,Directory,DirectoryInfo
+
+
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            //BinaryWriter bw = new BinaryWriter(File.Open("d:\\file1.dat", FileMode.Create));
+            //bw.Write(100.20);
+            //bw.Write("this is file info");
+            //bw.Write(true);
+            //bw.Close();
+
+            BinaryReader br = new BinaryReader(File.Open(@"d:\file1.dat", FileMode.Open));
+            Console.WriteLine(br.ReadDouble());
+            Console.WriteLine(br.ReadString());
+            Console.WriteLine(br.ReadBoolean());
+            br.Close();
+
+        }
+    }
+
+
+static void Main(string[] args)
+        {
+            //FileStream fs = new FileStream(@"d:\file2.txt", FileMode.Create);
+            //StreamWriter sw = new StreamWriter(fs);
+            //sw.Write("this is c# file handling using stream writer and reader");
+            //sw.Close();
+            //fs.Close();
+
+            FileStream fs = new FileStream(@"d:\file2.txt", FileMode.Open);
+            StreamReader sr = new StreamReader(fs);
+            string str = sr.ReadToEnd();
+            Console.WriteLine(str);
+            sr.Close();
+            fs.Close();
+        }
+
+
+static void Main(string[] args)
+        {
+            // File.WriteAllText("d:\\file3.txt", "this is file class for text files");
+            //string str= File.ReadAllText("d:\\file3.txt");
+            //Console.WriteLine(str);
+
+            //byte[] b1 = new byte[] {10,20,30,40,50,60 };
+            //FileStream fs = new FileStream(@"d:\file4.txt", FileMode.Create);
+            //fs.Write(b1, 0,b1.Length);
+            //fs.Close();
+
+            FileStream fs = new FileStream(@"d:\file4.txt", FileMode.Open);
+            fs.Seek(0, SeekOrigin.Begin);
+            for(int i=0;i<fs.Length;i++)
+            {
+                Console.WriteLine(fs.ReadByte());
+            }
+            fs.Close();
+        }
+
+
+FileInfo
+
+createText()
+Delete()
+CopyTo()
+MoveTo()
+Appendtext()
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            //FileInfo fi = new FileInfo(@"d:\demo1.txt");
+            //StreamWriter sw = fi.CreateText();
+            //sw.Write("this is fileinfo class to create file");
+            //sw.Close(); 
+
+            //string path = "d:\\demo3.txt";
+            //FileInfo fi1 = new FileInfo(@"d:\demo1.txt");
+            //FileInfo fi2 = new FileInfo(path);
+            //fi1.CopyTo(path);
+
+            FileInfo fi3 = new FileInfo(@"d:\demo3.txt");
+            fi3.Delete();
+        }
+    }
+
+static void Main(string[] args)
+        {
+            string path = "e:\\demo4.txt";
+            FileInfo fi1 = new FileInfo(@"d:\demo1.txt");
+            FileInfo fi2 = new FileInfo(path);
+            fi1.MoveTo(path);
+
+
+            FileInfo fi1 = new FileInfo(@"d:\demo1.txt");
+            StreamWriter sw = fi1.AppendText();
+            sw.WriteLine("performing append");
+            sw.WriteLine("operation on existing file");
+            sw.WriteLine("using fielinfo class");
+            sw.Close();
+
+            FileInfo fi1 = new FileInfo(@"d:\demo1.txt");
+            StreamReader sr = fi1.OpenText();
+            string str = "";
+            while((str=sr.ReadLine())!=null)
+            {
+                Console.WriteLine(str);
+            }
+            sr.Close();
+        }
+
+static void Main(string[] args)
+        {
+            FileInfo fi1 = new FileInfo(@"d:\demo1.txt");
+
+            Console.WriteLine(fi1.Name);
+            Console.WriteLine(fi1.Length);
+            Console.WriteLine(fi1.CreationTime);
+            Console.WriteLine(fi1.LastAccessTime);
+            Console.WriteLine(fi1.Exists);
+        }
+
+DirectoryInfo:
+ static void Main(string[] args)
+        {
+            FileInfo fi1 = new FileInfo(@"d:\demo1.txt");
+
+            Console.WriteLine(fi1.Name);
+            Console.WriteLine(fi1.Length);
+            Console.WriteLine(fi1.CreationTime);
+            Console.WriteLine(fi1.LastAccessTime);
+            Console.WriteLine(fi1.Exists);
+
+
+            //string path = @"D:\NewFD1";
+            //DirectoryInfo di = new DirectoryInfo(path);
+            //di.Create();
+
+            string path = @"D:\NewFD1";
+            DirectoryInfo di = new DirectoryInfo(path);
+            DirectoryInfo di1 = di.CreateSubdirectory("NewSFD1");
+
+        }
+
+
+ static void Main(string[] args)
+        {
+
+            //to create subfolder
+            //string path = @"D:\NewFD1";
+            //string path1 = @"D:\NewFD2";
+            //DirectoryInfo di = new DirectoryInfo(path);
+            //DirectoryInfo di1 = new DirectoryInfo(path1);
+            //di.MoveTo(path1);
+
+            DirectoryInfo di= new DirectoryInfo(@"D:\NewFD2");
+            DirectoryInfo[] dir = di.GetDirectories();
+            Console.WriteLine(dir.Length);
+
+        }
+
+
+
+
+
+

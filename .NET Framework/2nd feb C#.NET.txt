@@ -1,0 +1,479 @@
+Two-dimensional array
+
+ static void Main(string[] args)
+        {
+            int[,] array1 = new int[2, 2];
+
+            Console.WriteLine("enter array elements");
+            for(int i=0;i<2;i++)
+            {
+                for(int j=0;j<2;j++)
+                {
+                    array1[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+
+            Console.WriteLine("The array elements are:");
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    Console.Write(array1[i, j] + "\t");
+                }
+                Console.WriteLine("\n");
+            }
+        }
+
+WAP to find the sum of 2 two-dimensional arrays and display.
+
+Jagged Array
+
+Array->collection of elements
+
+Jagged Array->collection of Arrays
+
+
+int [][]Jarray=new int[3][];
+
+int[] a; single-dimen
+int[,] b; two-dimen
+int[][] c; Jagged
+
+
+ static void Main(string[] args)
+        {
+            int[][] Jarray = new int[4][];
+
+            Jarray[0] = new int[] {1,2,3 };
+            Jarray[1] = new int[] { 10, 20, 30,40,50 };
+            Jarray[2] = new int[] { 10, 20, 30,40 };
+            Jarray[3] = new int[] { 100, 200, 300, 400, 500,600,700 };
+
+            Console.WriteLine("The array elements are:");
+            for (int i = 0; i < Jarray.Length; i++)
+            {
+                for (int j = 0; j < Jarray[i].Length; j++)
+                {
+                    Console.Write(Jarray[i][j] + "\t");
+                }
+                Console.WriteLine("\n");
+            }
+        }
+
+OOPS in C#
+
+1.Class and object
+2.Constructor and Destructor
+3.Inheritance->"protected"
+4.Polymorphism
+
+
+Class and object
+
+Class->collection of datamembers/business entites, memberfunctions
+     ->Acess modifier/specifier private,protected,public
+
+namespace CG_APP1
+{
+    class Product
+    {
+       private int pid;
+       protected string pname;
+       public double price;
+
+        public void getdet()
+        {
+            Console.WriteLine("enter the product Details");
+            pid = Convert.ToInt32(Console.ReadLine());
+            pname = Console.ReadLine();
+            price = Convert.ToDouble(Console.ReadLine());
+        }
+        public void showdet()
+        {
+            Console.WriteLine(pid + "," + pname + "," + price);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Product obj1 = new Product(); //obj1[       ]
+            obj1.getdet();                //obj1[1,"computer",45000]
+            obj1.showdet();               //obj1[1,"computer",45000]
+
+            Product obj2 = new Product();
+            obj2.getdet();
+            obj2.showdet();
+
+            double total_price = obj1.price + obj2.price;
+            Console.WriteLine("Total Price=" + total_price);
+        }
+    }
+}
+
+function with parameters.
+
+namespace CG_APP1
+{
+    class Product
+    {
+       private int pid;
+       protected string pname;
+       public double price;
+
+        public void getdet(int a,string b,double c)
+        {
+            pid = a;
+            pname = b;
+            price = c;
+        }
+        public void showdet()
+        {
+            Console.WriteLine(pid + "," + pname + "," + price);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Product obj1 = new Product(); //obj1[       ]
+            obj1.getdet(1,"LCD",25000);                
+            obj1.showdet();              
+
+            Product obj2 = new Product();
+            obj2.getdet(2, "LED", 45000);
+            obj2.showdet();
+
+            double total_price = obj1.price + obj2.price;
+            Console.WriteLine("Total Price=" + total_price);
+        }
+    }
+}
+
+
+
+"this"->It is a pointer which eliminates the ambiguity/conflict between the data-member and function
+parameter.
+
+namespace CG_APP1
+{
+    class Product
+    {
+       private int pid;
+       protected string pname;
+       public double price;
+
+        public void getdet(int pid,string pname,double price)
+        {
+            this.pid = pid;
+            this.pname = pname;
+            this.price = price;
+        }
+
+        public void showdet()
+        {
+            Console.WriteLine(this.pid + "," + this.pname + "," + this.price);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Product obj1 = new Product(); //obj1[       ]
+            obj1.getdet(1,"LCD",25000);                
+            obj1.showdet();              
+
+            Product obj2 = new Product();
+            obj2.getdet(2, "LED", 45000);
+            obj2.showdet();
+
+            double total_price = obj1.price + obj2.price;
+            Console.WriteLine("Total Price=" + total_price);
+        }
+    }
+}
+
+function with return type.
+
+Convert.ToInt32()
+int.Parse()
+
+            string str1 = "hello";
+            bool b1 = true;
+            int x = Convert.ToInt32(b1);
+            Console.WriteLine(x);
+
+           string str1 = null;
+        //    bool b1 = true;
+            int x = Convert.ToInt32(str1);
+            Console.WriteLine(x);
+
+
+class Demo
+    {
+        int no1, no2;
+        public void getnumbers()
+        {
+            Console.WriteLine("enter 2 nos");
+
+            no1 = Convert.ToInt32(Console.ReadLine());
+            no2 = Convert.ToInt32(Console.ReadLine());
+        }
+        public int calculate()
+        {
+            return (no1 * no2);
+        }
+        public int greater() // ?: Ternary operator
+        {
+            //if (no1 > no2)
+            //    return no1;
+            //else
+            //    return no2;
+
+            return (no1 > no2 ? no1 : no2);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+            obj.getnumbers();
+            //int result= obj.calculate();
+            //Console.WriteLine("Product=" + result);
+
+            Console.WriteLine("Product=" + obj.calculate());
+        }
+    }
+}
+
+
+Constructor and Destructor:
+
+Constructor
+->It is a member of class.
+->It is used to initialise the members of class and allocates memory for object.
+->Constructor name should be same as class name
+->Constructor is public.
+->Constructor can take parameter.
+
+Types of constructor
+1.Default
+2.parameterised
+3.copy
+
+
+ Destructor:
+->It is a member of class.
+->It is used de-allocate/release memory for object.
+->Destructor name should be same as class name
+->Destructor is preceeded by tilde(~) operator
+->Destructor is by default public.
+
+ ~Employee()
+        {
+        }
+
+namespace CG_APP1
+{
+    class Employee
+    {
+        int eid;
+        string ename;
+        string edesig;
+
+        public Employee() //Default const
+        {
+            this.eid = 1;
+            this.ename = "Sham";
+            this.edesig = "HR";
+        }
+
+        public Employee(int eid,string ename,string edesig) //Param const
+        {
+            this.eid = eid;
+            this.ename = ename;
+            this.edesig = edesig;
+        }
+
+        public Employee (Employee obj) //copy const
+        {
+            this.eid = obj.eid;
+            this.ename = obj.ename;
+            this.edesig = obj.edesig;
+        }
+
+        public void display()
+        {
+            Console.WriteLine(eid + "," + ename + "," + edesig);
+        }
+
+        ~Employee()
+        {
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee e1 = new Employee(); //e1[eid=1,ename="Sham",edesig="HR"]
+            e1.display();
+
+            Employee e2 = new Employee(2,"Jay","TL"); 
+            e2.display();
+
+            Employee e3 = new Employee(e2); 
+            e3.display();
+        }
+    }
+}
+
+
+Static variable and non-static variable
+Static function and non-static function
+Static constructor and non-static constructor
+
+namespace CG_APP1
+{
+    class Example
+    {
+        public void display()
+        {
+            Console.WriteLine("this is a non-static method");
+        }
+
+        public static void print()
+        {
+            Console.WriteLine("this is a static method");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Example obj1 = new Example();
+            obj1.display();
+
+            Example obj2 = new Example();
+            obj2.display();
+
+            Example.print();
+        }
+    }
+}
+
+
+namespace CG_APP1
+{
+    class Example
+    {
+        int radius;
+        static double pi;
+
+        public Example(int radius)
+        {
+            this.radius = radius;
+        }
+
+        static Example()
+        {
+            Example.pi = Math.PI;
+        }
+
+        public void compute()
+        {
+            //Console.WriteLine("Area of circle=" + (Example.pi*this.radius*this.radius));
+            Console.WriteLine("Area of circle=" + (pi *radius *radius));
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Example obj1 = new Example(10);
+            obj1.compute();
+
+            Example obj2 = new Example(15);
+            obj2.compute();
+        }
+    }
+}
+
+Nullable types:
+
+-->a nullable type allows us to assign a null value to variable(int/double).
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            //Nullable<int> i = 10;
+
+            //Nullable<double> j = null;
+
+            int? i = 10;
+
+            int? j = null;
+
+
+            Console.WriteLine(i.HasValue);
+            Console.WriteLine(j.HasValue);
+
+            Console.WriteLine(i+","+j);
+
+            Console.WriteLine(i.GetValueOrDefault() + "," + j.GetValueOrDefault());
+
+
+        }
+    }
+
+Inheritance:
+
+->It is a method of deriving properties of baseclass/old class into derived class/new class
+->Inheritance provides code-reusability.
+->protected.
+5 types:
+1.Single
+2.Multiple(not supported)
+3.Multi-level
+4.heirarchial
+5.hybrid
+
+namespace CG_APP1
+{
+    class Demo1
+    {
+        protected int d1, d2;
+        public void getdimension()
+        {
+            Console.WriteLine("enter 2 dimension");
+            d1 = int.Parse(Console.ReadLine());
+            d2 = int.Parse(Console.ReadLine());
+        }
+    }
+    class Demo2 : Demo1
+    {
+        public void compute()
+        {
+            Console.WriteLine("Area of rect=" + (d1*d2));
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo2 obj = new Demo2();
+            obj.getdimension();
+            obj.compute();
+         }
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,889 @@
+String
+->strings are immutable in c#
+->we cannot modify the string once if it is created.
+
+ static void Main(string[] args)
+        {
+            string s1 = "MVC-CORE";
+            s1 += "is technology";
+
+            Console.WriteLine(s1);
+        }
+
+
+Stringbuilder
+->Stringbuilder is mutable in c#
+->we can modify the Stringbuilder once if it is created.
+ static void Main(string[] args)
+        {
+          
+            StringBuilder s1 = new StringBuilder("C#");
+            s1.Append("is high-level pro lang");
+
+            Console.WriteLine(s1);
+        }
+
+
+class stringdemo
+    {
+        public static void method1(string x)
+        {
+            string.Concat(x,"delhi");
+            Console.WriteLine(x);
+        }
+
+        public static void method2(StringBuilder x)
+        {
+            x.Append("york");
+            Console.WriteLine(x);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            stringdemo.method1("new");
+
+            StringBuilder sb = new StringBuilder("new");
+            stringdemo.method2(sb);
+        }
+    }
+    
+
+ref and out parameter
+default and named parameter
+params
+is and as operator
+
+namespace CG_APP1
+{
+    class demo
+    {
+        public static void swap(int a,int b)
+        {
+            int t;
+            t = a;
+            a = b;
+            b = t;
+            Console.WriteLine(a+" , "+b);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 100;
+            int b = 200;
+            demo.swap(a, b); //call by value
+        }
+    }
+    }
+
+namespace CG_APP1
+{
+    class demo
+    {
+        public static void swap(ref int a,ref int b)
+        {
+            int t;
+            t = a;
+            a = b;
+            b = t;
+            Console.WriteLine(a+" , "+b);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 100;
+            int b = 200;
+            demo.swap(ref a, ref b); //call by reference
+        }
+    }
+    
+}
+
+ out parameter
+
+namespace CG_APP1
+{
+    class demo
+    {
+        public static void methodone(int a,int b,out int res1,out int res2)
+        {
+            res1 = a + b;
+            res2 = a - b;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int res1, res2;
+            int a = 100;
+            int b = 200;
+            demo.methodone(a, b, out res1, out res2);
+            Console.WriteLine("Sum=" + res1);
+            Console.WriteLine("Diff=" + res2);
+        }
+    }
+}
+
+default and named parameter
+
+namespace CG_APP1
+{
+    //Named parameter
+    class demo
+    {
+        public static void methodone(int pid,string pname,double unitprice)
+        {
+            Console.WriteLine("Product Id" + pid);
+            Console.WriteLine("Product Name=" + pname);
+            Console.WriteLine("unitPrice=" + unitprice);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            demo.methodone(1,"c# Pro Book",4500);
+
+          //  demo.methodone("c# Pro Book",3, 4500);
+
+            demo.methodone(pid:2, pname:"C++ Pro Book", unitprice:3500);
+
+            demo.methodone(unitprice: 6500, pname: "SQL Pro Book", pid: 3);
+        }
+    }
+    
+}
+
+Default Parameter(optional parameter)
+
+ //Default/optional parameter
+    class demo
+    {
+        public static void methodone(int regno,string name,int age=22,string branch="CS")
+        {
+            Console.WriteLine("Reg Id=" + regno);
+            Console.WriteLine("Student Name=" + name);
+            Console.WriteLine("Student's age=" + age);
+            Console.WriteLine("Branch=" + branch);
+            Console.WriteLine("--------------------------");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            demo.methodone(1, "Ana");
+            demo.methodone(2, "Anmay",21);
+            demo.methodone(3, "Anu", 24,"INFO SC");
+        }
+    }
+
+params ->
+
+class demo
+    {
+        public static void methodone(params int []a)
+        {
+            foreach(int i in a)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            demo.methodone(10, 20, 30);
+
+            demo.methodone(10, 20, 30,40,50,60,70);
+
+            demo.methodone(50,250);
+
+            int[] x = {5,10,15,20 };
+
+            demo.methodone(x);
+        }
+    }
+
+ class demo
+    {
+        public static void methodone(params object []a)
+        {
+            foreach(object i in a)
+            {
+                Console.WriteLine(i);
+            }
+            Console.WriteLine("-------------------");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            demo.methodone(1, "C#.NET","1 MONTH");
+
+            demo.methodone("HTML","CSS","JAVASCRIPT","JQUERY");
+
+            demo.methodone(11,"computer",35000,12,"laptop",56000);
+        }
+    }
+    
+is and as operator
+
+is->
+It is an operator to "check runtime types" of an object.
+is operator returns boolean value.
+is operator is used only for reference.
+
+namespace CG_APP1
+{
+    class demo1
+    {
+       
+    }
+    class demo2
+    {
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            demo1 obj1 = new demo1();
+            demo2 obj2 = new demo2();
+            Console.WriteLine(obj1 is demo1);
+            Console.WriteLine(obj1 is demo2);
+
+            Console.WriteLine(obj2 is demo2);
+            Console.WriteLine(obj2 is demo1);
+
+            Console.WriteLine(obj1 is object);
+            Console.WriteLine(obj2 is object);
+        }
+    }
+    
+}
+
+as operator
+->It is an operator to perform converion between the compatiable types.
+
+
+ class demo1
+    {
+       
+    }
+    class demo2
+    {
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            object[] obj = new object[6];
+
+            obj[0] = new demo1();
+            obj[1] = new demo2();
+            obj[2] = "hello";
+            obj[3] = 100;
+            obj[4] = null;
+            obj[5] = true;
+
+            for(int i=0;i<obj.Length;i++)
+            {
+                string res = obj[i] as string;
+
+                if (res != null)
+                    Console.WriteLine(res);
+                else
+                    Console.WriteLine("not a string");
+            }
+            
+        }
+    }
+
+}
+
+
+enum and struct
+
+enum: collection of named integer constants.
+
+namespace CG_APP1
+{
+    enum category
+    {
+        electronics=15,
+        stationary=90,
+        homeappliances=80,
+        electrical
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(category.homeappliances);
+            Console.WriteLine((int)category.homeappliances);
+        }
+    }
+    
+}
+
+struct:
+namespace CG_APP1
+{
+    struct customer
+    {
+        public int cid;
+        public string cname;
+        public string location;
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            customer cdet1; //=new customer();
+            cdet1.cid = 1;
+            cdet1.cname = "HCL";
+            cdet1.location = "Bangalore";
+            Console.WriteLine(cdet1.cid + "," + cdet1.cname + "," + cdet1.location);
+        }
+    }
+    
+}
+
+
+value type
+->Predefined datatypes,int,double,string,bool,enum,struct
+->value type uses the stack memory
+->holds the data within its own memory.
+
+int x=10;
+double y;
+
+
+reference type
+->class,object,array,interface,stringbuilder
+->reference type uses heap memory for data storage.
+->ref type contains a pointer to another memory location this memory location holds data.
+
+Demo obj=new  Demo();
+int []a=new int[5];
+
+
+Boxing and Unboxing
+
+Boxing->method of conversion from value type to ref type.
+It is an implicit converion.
+            int x = 10;
+            object y = x; //Boxing
+            Console.WriteLine(y);
+
+Unboxing->method of conversion from ref type to value type.
+It is an explicit converion.
+
+ static void Main(string[] args)
+        {
+            int x = 10;
+            object y = x; //Boxing
+
+            int result = (int)y; //unboxing
+
+            Console.WriteLine(result);
+        }
+
+
+Properties and Indexer
+
+
+Properties
+->provides access to private data-members of class
+->Properties has accessors get and set
+
+namespace CG_APP1
+{
+    class student
+    {
+        int sid;
+        string sname;
+        double permarks;
+
+        public int _sid
+        {
+            get { return sid; }
+            set { sid = value; }
+        }
+
+        public string _sname
+        {
+            get { return sname; }
+            set { sname = value; }
+        }
+        public double _permarks
+        {
+            get { return permarks; }
+            set { permarks = value; }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            student s1 = new student();
+            s1._sid = 1; //set
+            s1._sname = "scott";
+            s1._permarks = 70.88;
+
+            Console.WriteLine(s1._sid+","+s1._sname+","+s1._permarks); //get
+        }
+    }
+}
+
+types of properties:
+
+1.readonly
+
+ //readonly property.
+    class student
+    {
+        int sid;
+        string sname;
+        double permarks;
+
+        public student()
+        {
+            sid = 1;
+            sname = "John";
+            permarks = 86.99;
+        }
+        public int _sid
+        {
+            get { return sid; }
+        }
+        public string _sname
+        {
+            get { return sname; }
+        }
+        public double _permarks
+        {
+            get { return permarks; }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            student s1 = new student();
+
+            Console.WriteLine(s1._sid+","+s1._sname+","+s1._permarks); //get
+        }
+    }
+}
+
+
+2.writeonly
+
+namespace CG_APP1
+{
+    //writeonly property.
+    class student
+    {
+        int sid;
+        string sname;
+        double permarks;
+       
+        public int _sid
+        {
+           set {sid=value; }
+        }
+        public string _sname
+        {
+            set {sname=value; }
+        }
+        public double _permarks
+        {
+            set { permarks=value; }
+        }
+
+        public void print()
+        {
+            Console.WriteLine(sid+","+sname+","+permarks);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            student s1 = new student();
+            s1._sid = 1;
+            s1._sname = "xxxx";
+            s1._permarks = 70;
+
+            s1.print();
+        }
+    }
+}
+
+namespace CG_APP1
+{
+    class student
+    {
+        public int _sid { get; set; }
+        public string _sname { get; set; }
+        public double _permarks { get; set; }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            student obj = new student() { _sid = 1, _sname = "john", _permarks = 70 };//object initialiser
+           
+            Console.WriteLine(obj._sid + "," + obj._sname + "," + obj._permarks);
+        }
+    }
+}
+
+Indexer:
+
+->member of class which is used to access and set the elements of array in class.
+->indexer does not have name.
+->indexer has get and set accessor.
+namespace CG_APP1
+{
+    class Demo
+    {
+        int[] a;
+
+        public Demo()
+        {
+            a = new int[] {10,20,30,40 };
+        }
+
+        public int this[int index]
+        {
+            get { return a[index]; }
+            set { a[index] = value; }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+            obj[0] = 100; //set
+            obj[3] = 400;
+            for(int i=0;i<4;i++)
+            {
+                Console.WriteLine(obj[i]); //get
+            }
+        }
+    }
+}
+
+NonGeneric-Collections:
+
+using System.Collections;
+-->they are not "type safe"
+
+ArrayList
+->this is a dynamic array
+->Its size can grow or shrink during runtime.
+
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] array = new int[5] { 100, 200, 300, 400, 500 }; //static
+
+            ArrayList a1 = new ArrayList(); //Dynamic array
+            a1.AddRange(array);
+            a1.Add(10);
+            a1.Add(20);
+            a1.Add(30);
+            a1.Add(40);
+            a1.Add("hello");
+            a1.Add(34.56);
+            a1.Add(true);
+
+            //a1.Sort();
+            //a1.Reverse();
+
+            //a1.Remove(100);
+            //a1.RemoveAt(2);
+            a1.RemoveRange(0, 3);
+
+            foreach(var i in a1)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+}
+
+Hashtable
+->It is a class which stores the data based on key-value pair.
+->key's of hashtable cannot be duplicated.
+->data is stored randomly in hashtable.
+
+static void Main(string[] args)
+        {
+            Hashtable ht = new Hashtable();
+            ht.Add("C#", "It is programming lang");
+            ht.Add("HTML", "HYPER TEXT MARKUP LANG");
+            ht.Add("CSS", "CASCADING STYLE SHEET");
+            ht.Add("XML", "extensible markup lang");
+            ht.Add("JS", "JAVASCRIPT");
+
+            ICollection c1 = ht.Keys;
+            ICollection c2 = ht.Values;
+
+            foreach (var i in c1)
+            {
+                Console.WriteLine(i);
+            }
+
+            foreach (var i in c2)
+            {
+                Console.WriteLine(i);
+            }
+            IDictionaryEnumerator etr = ht.GetEnumerator();
+            while(etr.MoveNext())
+            {
+                Console.WriteLine(etr.Key + "-->" + etr.Value);
+            }
+
+            foreach(DictionaryEntry et in ht)
+            {
+                Console.WriteLine(et.Key+"-->"+et.Value);
+            }
+
+        }
+
+SortedList
+->It is a class which stores the data based on key-value pair.
+->key's of SortedList cannot be duplicated.
+->data is stored by sorting keys in SortedList.
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            SortedList st = new SortedList();
+            st.Add(5, "It is programming lang");
+            st.Add(1, "HYPER TEXT MARKUP LANG");
+            st.Add(3, "CASCADING STYLE SHEET");
+            st.Add(2, "extensible markup lang");
+            st.Add(4, "JAVASCRIPT");
+
+            ICollection c1 = st.Keys;
+            ICollection c2 = st.Values;
+
+            foreach (var i in c1)
+            {
+                Console.WriteLine(i);
+            }
+
+            foreach (var i in c2)
+            {
+                Console.WriteLine(i);
+            }
+
+            IDictionaryEnumerator etr = st.GetEnumerator();
+            while(etr.MoveNext())
+            {
+                Console.WriteLine(etr.Key + "-->" + etr.Value);
+            }
+
+            foreach(DictionaryEntry et in st)
+            {
+                Console.WriteLine(et.Key+"-->"+et.Value);
+            }
+        }
+    }
+}
+
+
+stack
+class Program
+    {
+        static void Main(string[] args)
+        {
+            Stack st = new Stack();//LIFO
+            st.Push("one");
+            st.Push("two");
+            st.Push("three");
+            st.Push("four");
+
+            st.Pop();
+
+            foreach (string i in st)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+
+queue
+static void Main(string[] args)
+        {
+            Queue qi = new Queue(); //FIFO
+            qi.Enqueue("c#");
+            qi.Enqueue("j#");
+            qi.Enqueue("vb.net");
+            qi.Enqueue("f#");
+
+            qi.Dequeue();
+
+            foreach (string i in qi)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+Generic-Collections:
+
+using System.Collections.Generic;
+
+-->"type safety"
+
+List<string>
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> list1 = new List<string>();
+            list1.Add("CSS");
+            list1.Add("JAVASCRIPT");
+            list1.Add("XML");
+            list1.Add("JQUERY");
+
+            list1.AddRange(new string[] {"C-PRO","C++","AJAX" });
+
+            list1.Sort();
+            list1.Reverse();
+
+            //list1.Remove("C-PRO");
+            ///list1.RemoveAt(0);
+            list1.RemoveRange(3, 3);
+
+            foreach (string i in list1)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+
+Dictionary<>
+
+ static void Main(string[] args)
+        {
+            Dictionary<string, string> di = new Dictionary<string, string>();
+            di.Add("C#", "It is programming lang");
+            di.Add("HTML", "HYPER TEXT MARKUP LANG");
+            di.Add("CSS", "CASCADING STYLE SHEET");
+            di.Add("XML", "extensible markup lang");
+            di.Add("JS", "JAVASCRIPT");
+
+            ICollection c1 = di.Keys;
+            ICollection c2 = di.Values;
+
+            foreach (var i in c1)
+            {
+                Console.WriteLine(i);
+            }
+
+            foreach (var i in c2)
+            {
+                Console.WriteLine(i);
+            }
+
+            IDictionaryEnumerator etr = di.GetEnumerator();
+            while (etr.MoveNext())
+            {
+                Console.WriteLine(etr.Key + "-->" + etr.Value);
+            }
+
+            foreach (KeyValuePair<string,string> et in di)
+            {
+                Console.WriteLine(et.Key + "-->" + et.Value);
+            }
+        }
+    }
+SortedDictonary<>
+
+static void Main(string[] args)
+        {
+            SortedDictionary<string, string> di = new SortedDictionary<string, string>();
+            di.Add("C#", "It is programming lang");
+            di.Add("HTML", "HYPER TEXT MARKUP LANG");
+            di.Add("CSS", "CASCADING STYLE SHEET");
+            di.Add("XML", "extensible markup lang");
+            di.Add("JS", "JAVASCRIPT");
+
+            ICollection c1 = di.Keys;
+            ICollection c2 = di.Values;
+
+            foreach (var i in c1)
+            {
+                Console.WriteLine(i);
+            }
+
+            foreach (var i in c2)
+            {
+                Console.WriteLine(i);
+            }
+
+            IDictionaryEnumerator etr = di.GetEnumerator();
+            while (etr.MoveNext())
+            {
+                Console.WriteLine(etr.Key + "-->" + etr.Value);
+            }
+
+            foreach (KeyValuePair<string,string> et in di)
+            {
+                Console.WriteLine(et.Key + "-->" + et.Value);
+            }
+        }
+    }
+stack<>
+ static void Main(string[] args)
+        {
+            Stack<int> st = new Stack<int>();
+            st.Push(11);
+            st.Push(22);
+            st.Push(33);
+            st.Push(44);
+
+            st.Pop();
+
+            foreach (int i in st)
+            {
+                Console.WriteLine(i);
+            }
+            
+        }
+queue<>
+ Queue<string> obj = new Queue<string>();
+            obj.Enqueue("java");
+            obj.Enqueue("j2ee");
+            obj.Enqueue("html");
+
+            obj.Dequeue();
+            foreach (string i in obj)
+            {
+                Console.WriteLine(i);
+            }
+
+
+
+
+
+
